@@ -53,7 +53,6 @@ body {
 }
 </style>
 <head>
-	
 	<title>Force Graph</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -84,6 +83,25 @@ body {
 				<a class="link-info text-decoration-none" href="https://twitter.com/" target="_blank">Twitter</a>, 
 				<a class="link-info text-decoration-none" href="https://github.com/" target="_blank">Github</a></p>
 
+
+
+            <div class="viewer-setting container">
+                <div class="viewer-key"> Search</div>
+                <div class="viewer-value button" id="searchBy">
+                    <label class="radio-container">ID
+                        <input type="radio" checked="checked" name="searchBy" value="id" onclick="javascript:search()">
+                        <span class="checkmark"></span>
+                    </label>
+                </div>
+                <input type="search" id="search">
+            </div>
+
+
+            <div class="viewer-setting container">
+                <button class="green-button" value="id" onclick="javascript:Graph.centerAt(node.x, node.y, 1000)">Zoom Node</button>
+            </div>
+
+
 				<script src="//unpkg.com/force-graph"></script>
 				  <!--<script src="../../dist/force-graph.js"></script>-->
 				  <div id="graph"></div>
@@ -102,13 +120,15 @@ body {
 				
 				    const Graph = ForceGraph()
 				      (document.getElementById('graph'))
-				        .linkDirectionalParticles(10)
+				      //  .linkDirectionalParticles(10)
+				        .linkDirectionalArrowLength(6)
 				        .graphData(gData)
 				    	.nodeLabel('id')
 						.nodeAutoColorBy('group') 	
+						.nodeColor(node => 'violet')
 					//	.nodeColor('') 	
 						.linkAutoColorBy(d => gData.nodes[d.source].group)
-					//	.linkColor('')
+						.linkColor(link=> 'white')
 				 		.linkDirectionalParticleWidth(2.3)
 				   		.onNodeClick(node => {
 				      	// Center/zoom on node
