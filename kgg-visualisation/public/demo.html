@@ -1,0 +1,635 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <title>BIM Management Platform</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+	<link rel="manifest" href="/manifest.json">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" >
+	<link rel="stylesheet" href="static/vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css">	
+	<link rel="stylesheet" href="static/vendors/bower_components/animate.css/animate.min.css">
+	<link rel="stylesheet" href="static/vendors/bower_components/nouislider/distribute/nouislider.min.css">
+	<link rel="stylesheet" href="static/vendors/bower_components/jquery.scrollbar/jquery.scrollbar.css">
+	<link rel="stylesheet" href="static/vendors/bower_components/select2/dist/css/select2.css">
+	<link rel="stylesheet" href="static/vendors/bower_components/dropzone/dist/dropzone.css">
+	<link rel="stylesheet" href="static/vendors/bower_components/jqTree/jqtree.css">
+	<link rel="stylesheet" href="static/css/app.css">
+	<link rel="stylesheet" href="static/css/custom.css">
+</head>
+<body data-ma-theme=blue-grey>
+	<main id="main1" class="main">
+	<div class="page-loader"></div>
+	<header class="header">
+		<div class="navigation-trigger hidden-xl-up" data-ma-action="aside-open" data-ma-target=".sidebar">
+			<div class="navigation-trigger__inner">
+				<i class="navigation-trigger__line"></i> 
+				<i class="navigation-trigger__line"></i> 
+				<i class="navigation-trigger__line"></i>
+			</div>
+		</div>
+		<div class="header__logo">
+			<h1>
+				<a href="#"><img src="static/img/cogito-white2.png" width="90"/></a>
+			</h1>
+		</div>
+		<div class="project hidden-md-down">
+        </div>
+		<ul class="top-nav">
+			<li class="dropdown">
+				<a href="#" data-toggle="dropdown"><i class="zmdi zmdi-more-vert"></i></a>
+				<div class2="dropdown-menu dropdown-menu-right" role="menu" style="border:0px solid #000;">
+					<div class="listview__header"> <span>Demo</span> </div>
+				</div>
+			</li>
+		</ul>
+	</header>
+	<aside class="sidebar">
+		<div class="scrollbar-inner">
+		<div class="user">
+			<div class="user__info">
+				<div>
+					<div class="user__name">
+						<span>Demo Page</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<ul class="navigation">
+			
+		</ul>
+	</div>
+	</aside>
+	<section class="content">
+		<div class="toolbar">
+			<div class="toolbar__nav">
+				<nav class="breadcrumb">
+					NAV
+				</nav>
+			</div>
+			<div class="actions"></div>
+		</div>
+		<div class="right_container">
+			<div class="treeview_container">
+				<div class="right_container_title">
+					<p class="text-white pt-2 pl-2">Model Explorer</p>
+				</div>
+				<div class="treeview">Loading...</div>
+			</div>
+			<div class="ged_container">
+				<div class="right_container_title">
+					<p class="text-white pt-2 pl-2">Geometry Checker</p>
+				</div>
+				<div class="ged_container_body">
+					<div class='btn-group d-flex btn-group-toggle' data-toggle='buttons'>
+			    		<label class='btn w-100' style='font-size:12px;'><input name='ged_cle' id='ged_cle' type='checkbox' autocomplete='off'><span id="ged_cle_num"></span> Clash Erros</label>
+			    		<label class='btn w-100' style='font-size:12px;'><input name='ged_spe' id='ged_spe' type='checkbox' autocomplete='off'><span id="ged_spe_num"></span> Space Errors</label>
+			    		<label class='btn w-100' style='font-size:12px;'><input name='ged_cne' id='ged_cne' type='checkbox' autocomplete='off'><span id="ged_cne_num"></span> Containment Errors</label>
+			    	</div>
+				</div>
+			</div>
+			<div class="mvd_container">
+				<div class="right_container_title">
+					<p class="text-white pt-2 pl-2">Completeness Checker</p>
+				</div>
+				<div class="mvd_container_body">
+                    <div class="p-3">
+						<div class="radio">
+							<input type="radio" name="report" value="5abfe826-e4cd-48c3-8c73-d1174d8765d7" id="5abfe826-e4cd-48c3-8c73-d1174d8765d7" autocomplete="off">
+							<label class="radio__label" for="5abfe826-e4cd-48c3-8c73-d1174d8765d7">Thermal Properties</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="info_container">
+				<div class="right_container_title">
+					<p class="text-white pt-2 pl-2">Information</p>
+				</div>
+				<div class="info_container_body">#1</div>
+			</div>
+		</div>
+	</section>
+	</main>
+
+	<script src="static/js/xeogl/xeogl.js"></script>
+    <script src="static/js/xeogl/glTFModel.js"></script>
+    <script src="static/js/xeogl/OBJModel.js"></script>
+    
+    <script>
+    	
+    	/*<![CDATA[*/
+    		
+    		var revision = {"revisionId":"bb3f35ef-70a9-40f9-8ac8-4e3e1851e27c","revisionName":"R007","revisionNumber":7,"revisionFilename":"PROJECT NEW21","revisionValidGed":false,"revisionValidMvd":false,"revisionDescription":"","projectDto":{"projectId":"08e86fac-5309-474b-9dc9-0abe7c74adb4","projectUniqueReference":"08e86fac-5309-474b-9dc9-0abe7c74adb4","projectName":"Project_7","projectDescription":null,"projectCountryCode":"GR","projectAddress":"N\/A","projectNamingConvention":false}};
+			var treedata = "b2f8c0d8-4244-4cc5-ac93-4b88e3f3769f";
+			var brg = "8725d305-15e7-4bd8-84c9-f93ce5f79c26";
+			var sbd = "7331995f-bd05-464a-b586-e556f3aa3c66";
+			var mvddata = null;
+			
+			var ged = "557efbeb-0017-4364-bd8b-ac715a8a1c5b";
+			var geddata = "{\"containment\":1,\"clash\":2,\"space\":2}";
+			
+			var model1 = null;
+			var model2 = null;
+			var model3 = null;
+
+			var node_project = null;
+			var hide_non_physical = true;
+
+			var elementIdsByType = {};
+			var spaceBoundariesByStorey = {};
+			var elementMetaData = {};
+			var elementSpaceBoundaries = {};
+			
+			var cameraFlight = null;
+			var cameraControl = null;
+    		var camera = null;
+    					
+    		new xeogl.AmbientLight({color:[0.95,0.95,0.95],intensity:1.0});
+
+    		new xeogl.DirLight({
+   				dir: [1, 1, 1],
+   				color: [0.99, 0.99, 0.99],
+   				intensity: .9,
+  				space: "view",
+   				shadow: false     
+			});
+    		
+			if(brg !== null) {
+
+			    cameraControl = new xeogl.CameraControl({
+			        pivoting: true
+			    });
+
+			    cameraFlight = new xeogl.CameraFlightAnimation();
+
+			    model1 = new xeogl.OBJModel({
+			    	id: "model1",
+			    	src: "static/data/demo_space_boundaries.obj",
+			        ghosted: false,
+			        quantizeGeometry: true,
+			        combineGeometry: true
+			    });
+
+			    var meshes = model1.meshes;
+		    
+			    model1.on("loaded", function() {
+					
+					hide(model1);
+										
+					if($('.treeview')[0] && treedata !== null) {
+						$.getJSON('static/data/jqtree.json', function(data) {
+							treeview_data(data[0]);
+							$('.treeview').tree({
+								data: data,
+								keyboardSupport: false,
+								autoOpen: 2,
+								onCreateLi: function(node, $li) {
+									$li.find('.jqtree-element').append(
+					    				'<div class="controls"><a href="#" class="edit" data-node-id="'+ node.id +'"><i class="zmdi zmdi-eye"></i></a></div>'
+									);
+								},
+								closedIcon: $('<i class="zmdi zmdi-plus-square"></i>'),
+								openedIcon: $('<i class="zmdi zmdi-minus-square"></i>')
+							});
+							var root_id = data[0].id;
+							node_project = $('.treeview').tree('getNodeById', root_id);
+							if(node_project) {
+								show(model1, node_project);
+							}
+						});
+					}
+
+			    	var scene = model1.scene;
+					camera = scene.camera;
+					var input = scene.input;
+
+					var highlightMaterial = scene.highlightMaterial;
+					highlightMaterial.edges = true;
+					highlightMaterial.edgeAlpha = 0.1;
+					highlightMaterial.fill = true;
+					highlightMaterial.fillAlpha = 0.1;
+
+					camera.eye = [0.0, -90.0, 20.0];
+					camera.look = [0.0, 0.0, 3.0];
+					camera.up = [0, 1, 0];
+
+					camera.projection = "perspective";
+
+					camera.worldAxis = [
+						1, 0, 0,
+					    0, 0, 1,
+					    0, 1, 0
+					];
+
+					cameraFlight.flyTo(model1);					
+
+					if(sbd !== null) {
+
+						model3 = new xeogl.OBJModel({
+							id: "model3",
+							src: "static/data/demo.obj",
+							ghosted: false,
+							quantizeGeometry: true,
+							combineGeometry: true
+						});
+
+						model3.on("loaded", function() {
+						    var meshes = model3.meshes;
+							for (m in meshes){
+								
+								// mesh
+								var mesh = meshes[m];
+								mesh.material.backfaces = true;
+								mesh.material.frontface = "cw";
+								
+								// default color
+								mesh.material.color = [0.8,0.7,0.4];
+								mesh.material.ambient = [0.8,0.7,0.4];
+								mesh.material.alpha = 0.2;
+
+								var str = mesh.id.substring(mesh.id.indexOf("#") + 1);	
+								var obj = JSON.parse(str);
+
+								if('buildingElements' in obj) {
+									if(typeof elementMetaData[obj.buildingElements[0]] !== 'undefined') {								
+										elementMetaData[obj.buildingElements[0]].sb.push(str);
+										var elementType = elementMetaData[obj.buildingElements[0]]['type'];
+										if(elementType.toUpperCase() == 'SLAB') {																			
+											mesh.material.color = [0.5,0.1,0.1];
+											mesh.material.ambient = [0.5,0.1,0.1];
+											mesh.material.alpha = 1.0;
+										}else if(elementType.toUpperCase() == 'WALL') {
+											mesh.material.color = [0.8,0.7,0.4];
+											mesh.material.ambient = [0.8,0.7,0.4];
+											mesh.material.alpha = 1.0;
+										}else if(elementType.toUpperCase() == 'WINDOW') {
+											mesh.material.color = [0.0,0.3,0.6];
+											mesh.material.ambient = [0.0,0.3,0.6];
+											mesh.material.alpha = 0.4;
+											mesh.material.alphaMode = "blend";
+										}else if(elementType.toUpperCase() == 'DOOR') {
+											mesh.material.color = [0.3,0.3,0.3];
+											mesh.material.ambient = [0.3,0.3,0.3];
+											mesh.material.alpha = 1.0;
+										}else if(elementType.toUpperCase() == 'ROOF') {	
+											mesh.material.color = [0.5,0.1,0.1];
+											mesh.material.ambient = [0.5,0.1,0.1];
+											mesh.material.alpha = 1.0;
+										}else if(elementType.toUpperCase() == 'OPENING') {
+											mesh.material.color = [0.3,0.4,0.0];
+											mesh.material.ambient = [0.3,0.4,0.0];
+											mesh.material.alpha = 1.0;	
+										}else if(elementType.toUpperCase() == 'COVERING') {
+											mesh.material.color = [0.8,0.7,0.4];
+											mesh.material.ambient = [0.8,0.7,0.4];
+											mesh.material.alpha = 1.0;
+										}else if(elementType.toUpperCase() == 'MEP') {
+											mesh.material.color = [0.8,0.7,0.4];
+											mesh.material.ambient = [0.8,0.7,0.4];
+											mesh.material.alpha = 1.0;
+										}else{
+											mesh.material.color = [0.8,0.7,0.4];
+											mesh.material.ambient = [0.8,0.7,0.4];
+											mesh.material.alpha = 1.0;	
+										}
+									}else{
+										console.log('BIM element not found, IfcGlobalId=' + obj.buildingElements[0]);
+									}
+								}else{
+									mesh.material.alpha = 0.0;
+								}
+								mesh.visible = false;
+							}
+					    });
+					}
+					if(ged !== null) {				
+						model2 = new xeogl.OBJModel({
+							id: "model2",
+							src: "/file/" + ged + "/download/",
+							ghosted: false,
+							quantizeGeometry: true,
+							combineGeometry: true
+						});
+						model2.on("loaded", function() {
+						    var meshes = model2.meshes;
+							for (m in meshes){
+								var mesh = meshes[m];
+								mesh.visible = false;
+								mesh.material.backfaces = true;
+								mesh.material.frontface = "cw";
+							}
+						});
+					}
+			    });
+
+			    cameraControl.on("hoverEnter", function(hit) {
+
+			    });
+
+			    cameraControl.on("hoverOut", function(hit) {
+			    
+			    });
+
+			    cameraControl.on("picked", function(hit) {
+
+			    	var mesh = hit.mesh;
+			        cameraFlight.flyTo(mesh);
+			    			
+			        unhighlight(model1);
+			        
+			        unselect(model1);
+			        unselect(model2);
+			        unselect(model3);
+			        
+			        mesh.selected = !mesh.selected;
+			        var str = mesh.id.substring(mesh.id.indexOf("#") + 1);
+					
+			        console.log('mesh_metadata -> ' + str);
+
+			        if(isJson(str)) {
+			        	
+			        	// -- 
+			        	
+				        var obj = JSON.parse(str);
+				        if(obj.type == 'CLE_cl'){			
+							var node = $('.treeview').tree('getNodeById', obj.data.gid1);
+							show(model1,node);
+							var node = $('.treeview').tree('getNodeById', obj.data.gid2);
+							show(model1,node);
+				      	}else if(obj.type == 'SPE'){
+							var node = $('.treeview').tree('getNodeById', obj.data.gid);						
+							show(model1, node);
+				      	}else if(obj.type == 'CNE'){
+			      		
+				      	}
+			        }else {
+			        	
+			        	// -- mvd
+			        				        	
+			        	if(mvddata != null) {
+						    for(var d of mvddata) {
+								for(var e of d.entities) {
+									if(e.global == str) {
+										var table = "<table class='mvd_table' border='0' cellpadding='4'>";
+										table += "<tr><td colspan='2' class='sel0'>" + e.global + "</td></tr>";
+										table += "<tr><td colspan='2' class='sel1'>" + e.name + "</td></tr>";
+										for(var r of e.rules){
+											var icon = '<i></i>';
+											if(r.valid){
+												icon = "<i class='zmdi zmdi-check' style='color:green;'></i>";						
+											}else{
+												icon = "<i class='zmdi zmdi-close' style='color:red;'></i>";
+											}
+											table += "<tr><td>" + r.description + "</td><td class='valid'>" + icon + "</td></tr>";
+										}
+										table += '</table>';
+										$(".info_container_body").empty();
+										$(".info_container_body").html(table);
+										$('.info_container').show();
+									}
+								}
+							}
+			        	}
+			        }
+			    });
+
+			    cameraControl.on("pickedNothing", function(hit) {
+			    	
+			    	$('.info_container').hide();
+			    	$(".info_container_body").empty();
+			    	
+			    	unhighlight(model1);		    	
+			    	unselect(model1);
+			    	unselect(model2);
+			    	unselect(model3);
+			    	cameraFlight.flyTo(model1);
+			    });  
+
+			    function unselect(model){
+			    	if(model != null){
+				    	var meshes = model.meshes;
+				    	for (m in meshes){
+							var mesh = meshes[m];
+							mesh.selected = false;
+						}
+			    	}
+			    }
+			    
+			    function hide(model){
+			    	if(model != null){
+				    	var meshes = model.meshes;
+				    	for (m in meshes){
+							var mesh = meshes[m];
+							mesh.visible = false;
+						}
+			    	}
+			    }
+
+			    function unhighlight(model){
+			    	if(model != null){
+				    	var meshes = model.meshes;
+				    	for (m in meshes){
+							var mesh = meshes[m];
+							mesh.highlighted = false;
+						}
+			    	}
+			    }
+
+			    function select(model,node){
+			    	if(model != null){
+				    	var meshes = model.meshes;
+				    	for (m in meshes){
+							var mesh = meshes[m];
+							if(mesh.id == model.id + "#" + node.id){
+								mesh.selected = true;
+							}
+						}
+			    	}
+			    }
+
+				function getMesh(model,id){
+			    	if(model != null){	
+				    	var meshes = model.meshes;
+				    	for (m in meshes){
+							var mesh = meshes[m];							
+							if(mesh.id == model.id + "#" + id){
+								return mesh;
+							}
+						}
+			    	}
+			    	return null;
+			    }
+				
+				function getSelected(model){
+			    	if(model != null){	
+				    	var meshes = model.meshes;
+				    	for (m in meshes){
+							var mesh = meshes[m];							
+							if(mesh.selected == true){
+								return mesh;
+							}
+						}
+			    	}
+			    	return null;
+			    }
+				
+				function getSbdMesh(id){
+			    	if(model3 != null){	
+				    	var meshes = model3.meshes;
+				    	for (m in meshes){
+							var mesh = meshes[m];
+							var str = mesh.id.substring(mesh.id.indexOf("#") + 1);
+							var obj = JSON.parse(str);
+							if(obj.id == id){
+								return mesh;
+							}
+						}
+			    	}
+			    	return null;
+			    }
+
+			    function isJson(str) {
+			        try {
+			            JSON.parse(str);
+			        } catch (e) {
+			            return false;
+			        }
+			        return true;
+			    }
+
+				function show(model,node) {
+					if(model != null){
+						var meshes = model.meshes;
+						if(node){
+							$('.treeview').tree('addToSelection', node, false);
+							//
+							var mesh = meshes[model.id + '#' + node.id];
+					 		if(mesh){
+					 			//new
+					 			mesh.material.backfaces = true;
+					 			if( (node.parent.name == 'Opening' || node.parent.name == 'Space') && hide_non_physical ) {
+					 				mesh.visible = false;
+					 				$('.treeview').tree('removeFromSelection', node);
+					 				$('.treeview').tree('removeFromSelection', node.parent);
+					 			}else{
+					 				mesh.visible = true;
+					 			}
+					 		}
+							// 
+							if(node.children.length > 0){
+								for(var i=0;i<node.children.length;i++){
+					 				var child = node.children[i];
+					 				if(child){
+					 					var mesh = meshes[model.id + '#' + child.id];	
+					 					show(model,child);
+									}
+								}
+							}
+						}
+					}
+				}
+
+				function hide(model,node){
+					if(node){
+						$('.treeview').tree('removeFromSelection', node);
+						//
+						var mesh = meshes[model.id + '#' + node.id];
+				 		if(mesh){
+				 			mesh.visible = false;
+				 		}
+				 		//
+						if(node.children.length > 0){
+							for(var i=0;i<node.children.length;i++){
+				 				var child = node.children[i];
+				 				if(child){
+				 					var mesh = meshes[model.id + '#' + child.id];	
+				 					if(mesh){
+				 						mesh.visible = false;
+				 					}
+				 					hide(model,child);
+								}
+							}
+						}
+					}
+				}
+				
+			    function treeview_data(node_project){
+					if(node_project){														
+						if(node_project.children.length > 0){
+							for(var i=0;i<node_project.children.length;i++){
+								var node_site = node_project.children[i];
+								if(node_site){						
+									if(node_site.children.length > 0){
+										for(var j=0;j<node_site.children.length;j++){
+											var node_building = node_site.children[j];
+											if(node_building){
+												if(node_building.children.length > 0){
+													for(var k=0;k<node_building.children.length;k++){
+														var node_storey = node_building.children[k];
+														if(node_storey){
+															if(node_storey.children){ // COGITO
+																if(node_storey.children.length > 0){
+																	for(var r=0;r<node_storey.children.length;r++){
+																		var node_type = node_storey.children[r];
+																		if(node_type){
+																			if(node_type.children.length > 0){
+																				for(var s=0;s<node_type.children.length;s++){
+																					var node_element = node_type.children[s];
+																					if(node_element){																																																									
+																						var obj = {};
+																						obj.type = node_type.name;
+																						obj.storey = node_storey.id;
+																						obj.sb = [];
+																						elementMetaData[node_element.id] = obj;
+																					}
+																				}
+																			}
+																		}
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}   
+			}
+
+		/*]]>*/
+	</script>
+			<script src="static/vendors/bower_components/jquery/dist/jquery.min.js"></script>
+     	    <script src="static/vendors/bower_components/popper.js/dist/umd/popper.min.js"></script>
+        	<script src="static/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        	<script src="static/vendors/bower_components/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+        	<script src="static/vendors/bower_components/jquery-scrollLock/jquery-scrollLock.min.js"></script>
+        	<script src="static/vendors/bower_components/dropzone/dist/min/dropzone.min.js"></script>
+        	<script src="static/vendors/bower_components/autosize/dist/autosize.min.js"></script>
+        	<script src="static/vendors/bower_components/remarkable-bootstrap-notify/dist/bootstrap-notify.min.js"></script>
+        	<script src="static/vendors/bower_components/sweetalert2/dist/sweetalert2.min.js"></script>
+        	<script src="static/vendors/bower_components/select2/dist/js/select2.full.min.js"></script>
+        	<script src="static/vendors/bower_components/jqTree/tree.jquery.debug.js"></script>
+        	<script src="static/vendors/bower_components/flot/jquery.flot.js"></script>
+    		<script src="static/vendors/bower_components/flot/jquery.flot.resize.js"></script>
+    		<script src="static/vendors/bower_components/flot/jquery.flot.time.js"></script>
+    		<script src="static/vendors/bower_components/flot/jquery.flot.pie.js"></script>	
+    		<script src="static/vendors/bower_components/flot/jquery.flot.categories.js"></script>
+        	<script src="static/vendors/bower_components/flot/jquery.flot.orderBars.js"></script>
+        	<script src="static/vendors/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+        	<script src="static/vendors/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+        	<script src="static/vendors/bower_components/datatables.net-buttons/js/buttons.print.min.js"></script>
+        	<script src="static/vendors/bower_components/datatables.net-buttons/js/buttons.html5.min.js"></script>
+        	<script src="static/vendors/bower_components/jquery.easy-pie-chart/dist/jquery.easypiechart.min.js"></script>
+        	<script src="static/vendors/bower_components/jquery.sparkline/jquery.sparkline.min.js"></script>
+        	<script src="static/js/inc/functions/app.js"></script>
+        	<script src="static/js/inc/functions/vendors.js"></script>
+        	<script src="static/js/inc/actions.js"></script>
+        	<script src="static/js/script.js"></script>
+			<script src="static/js/revision-viewer.js"></script>
+</body>
+</html>
