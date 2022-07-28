@@ -1,0 +1,41 @@
+<!-- // o grafos sketos  // --> 
+ <!DOCTYPE html>
+<html>
+<head>
+  <style> body { margin: 0; } </style>
+
+  <script src="//unpkg.com/force-graph"></script>
+  <!--<script src="../../dist/force-graph.js"></script>-->
+</head>
+
+<body>
+  <div id="graph"></div>
+
+  <script>
+    // Random tree
+    const N = 25;
+    const gData = {
+      nodes: [...Array(N).keys()].map(i => ({ id: i })),
+      links: [...Array(N).keys()]
+        .filter(id => id)
+        .map(id => ({
+          source: id,
+          target: Math.round(Math.random() * (id-1))
+        }))
+    };
+
+    const Graph = ForceGraph()
+      (document.getElementById('graph'))
+        .linkDirectionalParticles(10)
+        .graphData(gData)
+    	.nodeLabel('id')
+   		.nodeAutoColorBy('group')
+   		.linkDirectionalParticleWidth(2.3)
+   		.onNodeClick(node => {
+      	// Center/zoom on node
+     	Graph.centerAt(node.x, node.y, 1000);
+      	Graph.zoom(4, 700);
+   		});
+  </script>
+</body> 
+</html>
