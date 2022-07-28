@@ -7167,9 +7167,10 @@ class Canvas extends Component {
      * Creates a default canvas in the DOM.
      * @private
      */
+     /*UCL*/
     _createCanvas() {
 
-        const canvasId = "xeogl-canvas-" + math.createUUID();
+        const canvasId = "canvas"; /*+ math.createUUID();*/
         const body = document.getElementsByTagName("body")[0];
         const div = document.createElement('div');
 
@@ -7179,17 +7180,19 @@ class Canvas extends Component {
         style.padding = "0";
         style.margin = "0";
         style.background = "rgba(0,0,0,0);";
-        style.float = "left";
+        style.float = "none";
         style.left = "0";
         style.top = "0";
         style.position = "absolute";
         style.opacity = "1.0";
         style["z-index"] = "-10000";
 
-        div.innerHTML += '<canvas id="' + canvasId + '" style="width: 100%; height: 100%; float: left; margin: 0; padding: 0;"></canvas>';
+        div.innerHTML += '<canvas id="' + canvasId + '" style="width: 100%; height: 100%; float: none; margin: 0; padding: 0;"></canvas><div id="control" class="control"></div>';
 
         body.appendChild(div);
 
+		console.log('canvas-id=' + canvasId)
+		
         this.canvas = document.getElementById(canvasId);
     }
 
@@ -27943,7 +27946,7 @@ const core = {
      */
     getDefaultScene() {
         if (!defaultScene) {
-            defaultScene = new Scene({id: "default.scene"});
+            defaultScene = new Scene({id: "default.scene" });
         }
         return defaultScene;
     },
