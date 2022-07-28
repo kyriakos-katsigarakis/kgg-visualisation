@@ -1,0 +1,8 @@
+{
+  "name": "DT Runtime",
+  "short_name": "DT Runtime",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "description": "Runtime System"
+}
