@@ -52,7 +52,15 @@ body {
                 <div class="viewer-key"> Search</div>
                 <div class="viewer-value button" id="searchBy">
                     <label class="radio-container">ID
-                        <input type="radio" checked="checked" name="searchBy" value="id" onclick="javascript:Graph.centerAt(node.x, node.y, 1000)">
+                      <!-- 
+                        <input type="radio" checked="checked" name="searchBy" value="1">
+ 	                    <input type="radio" checked="checked" name="searchBy" value="2">
+ 	                           <input type="radio" checked="checked" name="searchBy" value="4">
+ 	                                  <input type="radio" checked="checked" name="searchBy" value="6">
+ 	                                         <input type="radio" checked="checked" name="searchBy" value="8">
+ 	-->
+ 	<!-- onclick="javascript:Graph.centerAt(node.x, node.y, 1000) -->
+ 
                         <span class="checkmark"></span>
                     </label>
                 </div>
@@ -70,6 +78,40 @@ body {
 				  <div id="graph"></div>
 				  <script>
 				    // Random tree
+				    
+				    /*
+				    $(document).ready(function() {
+				   		
+				    });
+				    */
+				    
+				    /*$("#textbox").on('input',function() {alert("Change detected!");});*/
+				    
+				    $("#search").on('input', function() {
+				    	
+				    	var id = $(this).val();
+				    	
+				    	console.log(   '--->'    + id );
+				   
+				    	if(id == ''){
+				    		id = 3;
+				    	}
+				    	Graph.zoom(id, 2000);
+				    	
+				    	//Graph.centerAt(node.x, node.y, 1000);
+				    	
+				    	/*
+				    	Graph.onNodeClick(node => {
+					      	
+					   	    Graph.centerAt(node.x, node.y, 1000);
+					   	    Graph.zoom(8, 2000);
+					   		});
+				  	  */
+				    });
+				    
+				    
+				    
+				    
 				    const N = 55;
 				    const gData = {
 				      nodes: [...Array(N).keys()].map(i => ({ id: i })),
@@ -98,6 +140,12 @@ body {
 				   	    Graph.centerAt(node.x, node.y, 1000);
 				   	    Graph.zoom(8, 2000);
 				   		});
+				    
+				    
+				    
+				    
+				    
+				    
 				  </script>
 					<script src="/assets/dist/js/jquery-3.6.0.min.js"></script>
 					<script src="/assets/custom/js/custom.js"></script>
